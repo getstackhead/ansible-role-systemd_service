@@ -32,6 +32,10 @@ Environment="{{ key }}={{ value }}"
 EnvironmentFile={{ item.environment_file | default(systemd_environment_file) }}
 {% endif %}
 
+{% if (item.working_directory is defined) or (systemd_working_directory is defined) %}
+WorkingDirectory={{ item.working_directory | default(systemd_working_directory) }}
+{% endif %}
+
 {% set _execstarts = item.execstarts %}
 {% if _execstarts is string %}
 {%   set _execstarts = [_execstarts] %}
